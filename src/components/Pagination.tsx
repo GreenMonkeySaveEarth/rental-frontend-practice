@@ -10,12 +10,13 @@ function Pagination(props: PaginationProps): JSX.Element {
     const { show } = props;
     const { limit, offset, total, setOffset } = useQueryContext();
     const [start, setStart] = useState(BASE_COUNT);
-    const [end, setEnd] = useState(limit);
+    const [end, setEnd] = useState(PAGINATION_BASE);
 
     useEffect(() => {
         setStart(offset + BASE_COUNT);
-        setEnd(Math.min(offset + limit, total));
-    }, [offset]);
+        setEnd(Math.min(offset+limit, total));
+    }, [offset, total, limit]);
+
     const handleForwardClick = () => {
         const newValue = offset + PAGINATION_BASE;
         if (newValue < total) {
