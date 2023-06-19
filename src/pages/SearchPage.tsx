@@ -38,6 +38,7 @@ const SearchPage: React.FC = () => {
 
     return (
         <>
+            <h2 className="text-4xl font-extrabold px-4 py-8">Outdoorsy Homework Assignment</h2>
             <SearchBar />
             <RentalListing listings={listings} />
             <Pagination />

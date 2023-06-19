@@ -16,8 +16,8 @@ function RentalListing(props: RentalListingProps): JSX.Element {
             /></div>);
     }
 
-    return <div className="flex justify-center items-center">
-        <ul className="max-w-md divide-y divide-gray-200">
+    return <div className="flex justify-center items-center px-4">
+        <ul className="max-w-lg divide-y divide-gray-200">
             {listings.map((listing) => (
                 <li key={listing.id} className="flex items-center py-4">
                     <div className="flex items-center space-x-6">
