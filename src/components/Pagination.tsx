@@ -1,9 +1,13 @@
 import { useQueryContext } from "../hooks/queryContext/context";
 import { PAGINATION_BASE } from "../constants";
 import { useEffect, useState } from "react";
+interface PaginationProps {
+    show: boolean;
+}
 
-function Pagination() {
+function Pagination(props: PaginationProps): JSX.Element {
     const BASE_COUNT = 1;
+    const { show } = props;
     const { limit, offset, total, setOffset } = useQueryContext();
     const [start, setStart] = useState(BASE_COUNT);
     const [end, setEnd] = useState(limit);
@@ -28,8 +32,10 @@ function Pagination() {
             setStart(BASE_COUNT)
         }
     }
-
-    return (
+    if (!show) {
+        return <></>;
+    }
+    return (        
         <div className="flex flex-col items-center py-20">
             <span className="text-sm text-gray-700">
                 Showing <span className="font-semibold text-gray-900 ">{start}</span> to <span className="font-semibold text-gray-900">{end}</span> of <span className="font-semibold text-gray-900">{total}</span> Entries

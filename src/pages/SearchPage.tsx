@@ -6,6 +6,7 @@ import { useQueryContext } from "../hooks/queryContext/context";
 
 const SearchPage: React.FC = () => {
     const [listings, setListings] = useState<ListingType[]>([]);
+    const [showPagination, setShowPagination] = useState<boolean>(false);
     const { keyword, limit, offset, setTotal } = useQueryContext();
 
     useEffect(() => {
@@ -22,6 +23,7 @@ const SearchPage: React.FC = () => {
                 }));
                 setTotal(data.meta.total)
                 setListings(listings);
+                setShowPagination(true);
             } catch (error) {
                 console.error("Error fetching listings:", error);
             }
@@ -41,7 +43,8 @@ const SearchPage: React.FC = () => {
             <h2 className="text-4xl font-extrabold px-4 py-8">Outdoorsy Homework Assignment</h2>
             <SearchBar />
             <RentalListing listings={listings} />
-            <Pagination />
+            <Pagination show={showPagination} />
+            
         </>
     );
 };
