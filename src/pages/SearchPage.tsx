@@ -1,31 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import RentalListing from "./RentalListing";
-import {Pagination} from "../components";
+import { Pagination, SearchBar } from "../components";
 import { ListingType, ListingResponseType, RentalListingType } from "./types";
-import  { useQueryContext } from "../hooks/queryContext/context";
-
-
-const usePrevious = <T extends unknown>(value: T): T | undefined => {
-    const ref = useRef<T>();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  };
+import { useQueryContext } from "../hooks/queryContext/context";
 
 const SearchPage: React.FC = () => {
-    const [keyword, setKeyword] = useState("");
     const [listings, setListings] = useState<ListingType[]>([]);
-    const { limit, offset, setOffset, setTotal } = useQueryContext();
-    const [keywordChange, setKeywordChange] = useState(false);
-    
-    useEffect(() => {
-        if (keywordChange) {
-            setOffset(0);
-            setKeywordChange(false);
-        }
-    }, [keywordChange])
-    
+    const { keyword, limit, offset, setTotal } = useQueryContext();
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -56,20 +38,7 @@ const SearchPage: React.FC = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center">
-                <div className="max-w-lg  py-16 w-full">
-                    <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        type="text"
-                        value={keyword}
-                        onChange={(e) => {
-                            setKeyword(e.target.value)
-                            setKeywordChange(true)
-                        }}
-                        placeholder="Enter keywords"
-                    />
-                </div>
-            </div>
+            <SearchBar />
             <RentalListing listings={listings} />
             <Pagination />
         </>
@@ -77,5 +46,6 @@ const SearchPage: React.FC = () => {
 };
 
 export default SearchPage;
+
 
 
