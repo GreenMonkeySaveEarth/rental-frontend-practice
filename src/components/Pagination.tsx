@@ -17,6 +17,12 @@ function Pagination(props: PaginationProps): JSX.Element {
         setEnd(Math.min(offset+limit, total));
     }, [offset, total, limit]);
 
+    useEffect(() => {
+        if (total === 0) {
+            setStart(total);
+        }
+    }  , [total])
+
     const handleForwardClick = () => {
         const newValue = offset + PAGINATION_BASE;
         if (newValue < total) {
