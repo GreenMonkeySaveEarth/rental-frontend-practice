@@ -15,6 +15,7 @@ function SearchInput() {
     return <div className="flex justify-center items-center px-4">
         <div className="max-w-lg  py-16 w-full">
             <input
+                tabIndex={0}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 type="text"
                 value={keyword}

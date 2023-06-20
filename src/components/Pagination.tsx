@@ -50,6 +50,7 @@ function Pagination(props: PaginationProps): JSX.Element {
             <div className="inline-flex mt-2 xs:mt-0">
                 <button
                     type="button"
+                    tabIndex={0}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
                     onClick={handleBackwardClick}
                     disabled={start === BASE_COUNT}
@@ -58,6 +59,7 @@ function Pagination(props: PaginationProps): JSX.Element {
                 </button>
                 <button
                     type="button"
+                    tabIndex={0}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
                     onClick={handleForwardClick}
                     disabled={offset + limit > total}
