@@ -3,17 +3,22 @@ import { InformationMessage } from '../components';
 
 interface RentalListingProps {
     listings: ListingType[];
+    loading: boolean;
 }
 
 
 function RentalListing(props: RentalListingProps): JSX.Element {
-    const { listings } = props;
-    if (listings.length === 0) {
-        return (<div className="flex justify-center items-center">
-            <InformationMessage
-                title="No results found"
-                message='Try searching for "Trailer" or "Camper"'
-            /></div>);
+    const { listings, loading } = props;
+    console.log('loading', loading)
+    if (!loading && listings.length === 0) {
+        return (
+            <div className="flex justify-center items-center">
+                <InformationMessage
+                    title="No results found"
+                    message='Try searching for "Trailer" or "Camper"'
+                />
+            </div>
+        );
     }
 
     return <div className="flex justify-center items-center px-4">

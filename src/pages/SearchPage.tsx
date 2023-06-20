@@ -5,6 +5,7 @@ import { ListingType, ListingResponseType, RentalListingType } from "./types";
 import { useQueryContext } from "../hooks/queryContext/context";
 
 const SearchPage: React.FC = () => {
+    const [loading, setLoading] = useState<boolean>(true);
     const [listings, setListings] = useState<ListingType[]>([]);
     const [showPagination, setShowPagination] = useState<boolean>(false);
     const { keyword, limit, offset, setTotal } = useQueryContext();
@@ -12,6 +13,7 @@ const SearchPage: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const response = await fetch(
                     `https://search.outdoorsy.com/rentals?filter[keywords]=${keyword}&page[limit]=${limit}&page[offset]=${offset}`
                 );
@@ -24,6 +26,7 @@ const SearchPage: React.FC = () => {
                 setTotal(data.meta.total)
                 setListings(listings);
                 setShowPagination(true);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching listings:", error);
             }
@@ -42,9 +45,8 @@ const SearchPage: React.FC = () => {
         <>
             <h2 className="text-4xl font-extrabold px-4 py-8">Outdoorsy Homework Assignment</h2>
             <SearchBar />
-            <RentalListing listings={listings} />
+            <RentalListing loading={loading} listings={listings} />
             <Pagination show={showPagination} />
-            
         </>
     );
 };
