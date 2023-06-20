@@ -9,7 +9,7 @@ interface RentalListingProps {
 
 function RentalListing(props: RentalListingProps): JSX.Element {
     const { listings, loading } = props;
-    console.log('loading', loading)
+
     if (!loading && listings.length === 0) {
         return (
             <div className="flex justify-center items-center">
